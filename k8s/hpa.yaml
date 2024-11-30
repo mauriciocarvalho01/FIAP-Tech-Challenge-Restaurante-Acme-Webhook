@@ -23,13 +23,6 @@ spec:
         target:
           type: AverageValue
           averageValue: 150Mi  # Meta de memória em 95Mi
-    - type: External
-      external:
-        metric:
-          name: rabbitmq_queue_messages
-        target:
-          type: Value
-          value: "10"
   behavior:
     scaleUp:
       stabilizationWindowSeconds: 10
