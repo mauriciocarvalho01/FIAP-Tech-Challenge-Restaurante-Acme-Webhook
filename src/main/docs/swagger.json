@@ -1,0 +1,173 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"WebhookHttp.CreateOutput": {
+				"properties": {
+					"ok": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"ok"
+				],
+				"type": "object"
+			},
+			"WebhookHttp.CreateInput": {
+				"properties": {
+					"data": {
+						"properties": {
+							"currency": {
+								"type": "string"
+							},
+							"amount": {
+								"type": "number",
+								"format": "double"
+							},
+							"code": {
+								"type": "string"
+							},
+							"id": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"currency",
+							"amount",
+							"code",
+							"id"
+						],
+						"type": "object"
+					},
+					"created_at": {
+						"type": "string"
+					},
+					"type": {
+						"type": "string"
+					},
+					"id": {
+						"type": "string",
+						"description": "Weebhook recebido do gateway de pagamento"
+					}
+				},
+				"required": [
+					"data",
+					"created_at",
+					"type",
+					"id"
+				],
+				"type": "object"
+			}
+		},
+		"securitySchemes": {
+			"apiKey": {
+				"type": "apiKey",
+				"name": "Authorization",
+				"in": "header"
+			}
+		}
+	},
+	"info": {
+		"title": "Restaurante ACME API",
+		"version": "1.0.0",
+		"description": "Documentação da API do restaurante ACME",
+		"license": {
+			"name": "GPL-3.0-or-later"
+		},
+		"contact": {
+			"name": "Mauricio Carvalho Pinheiro",
+			"email": "developer.mauricio1@gmail.com"
+		}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/checkout/webhook": {
+			"post": {
+				"operationId": "CreateWebhook",
+				"responses": {
+					"201": {
+						"description": "Created",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/WebhookHttp.CreateOutput"
+								}
+							}
+						}
+					},
+					"204": {
+						"description": "No content"
+					}
+				},
+				"summary": "Rota para criação do checkout",
+				"tags": [
+					"Webhook"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/WebhookHttp.CreateInput"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/healthcheck": {
+			"get": {
+				"operationId": "GetHealthCheck",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"properties": {
+										"message": {
+											"type": "string",
+											"enum": [
+												"OK"
+											],
+											"nullable": false
+										},
+										"uptime": {
+											"type": "number",
+											"format": "double"
+										}
+									},
+									"required": [
+										"message",
+										"uptime"
+									],
+									"type": "object"
+								}
+							}
+						}
+					},
+					"204": {
+						"description": "No content"
+					}
+				},
+				"summary": "Rota para verificação da saúde do servidor",
+				"tags": [
+					"Health Check"
+				],
+				"security": [],
+				"parameters": []
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/v1/api"
+		}
+	]
+}
