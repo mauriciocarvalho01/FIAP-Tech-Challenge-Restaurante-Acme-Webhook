@@ -32,5 +32,4 @@ MongoDBConnection.getInstance()
   })
   .catch((error: Error) => {
     logger.error(`Mysql connection error: ${error.message} ${JSON.stringify(env.database.mongodb)}`);
-    process.exit(1)
   });
