@@ -106,7 +106,7 @@ kubectl apply -f k8s/hpa.yaml
 ### 5. Documentos
 
 
-- [Arquitetura K8S](public/architecture.png)
+- [Arquitetura Microserviços](public/architecture.png)
 
 - [Docs Swagger](http://localhost:4080/api-docs/)
 
